@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/9
 file = open("day9_data", "r")
 data = file.read().splitlines()
 

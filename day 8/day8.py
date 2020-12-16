@@ -1,3 +1,4 @@
+# https://adventofcode.com/2020/day/8
 file = open("day8_data", "r")
 data = file.read().splitlines()
 operations = []
