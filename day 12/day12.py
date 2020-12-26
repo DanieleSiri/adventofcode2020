@@ -1,9 +1,7 @@
 # https://adventofcode.com/2020/day/12
 file = open("day12_data", "r")
 data = file.read().splitlines()
-directions = []
-for el in data:
-    directions.append((el[0], int(el[1:])))
+directions = [(el[0], int(el[1:])) for el in data]
 
 # initialize the ship coordinates
 # east and north if negative mean that we are respectively west and south
