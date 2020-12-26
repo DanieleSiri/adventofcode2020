@@ -1,10 +1,7 @@
 # https://adventofcode.com/2020/day/10
 file = open("day10_data", "r")
-data = file.read().splitlines()
-jolts_list = [0]  # first input as per problem request
-for x in data:
-    jolts_list.append(int(x))
-
+jolts_list = [int(x) for x in file.read().splitlines()]
+jolts_list.insert(0, 0)  # first element is 0 as per problem request
 # sorting the list makes the iteration through it easier
 jolts_list.sort()
 # this is because we have to count the last jolt which is always + 3 from the last element of the list
@@ -58,3 +55,7 @@ for key, number in enumerate(jolts_list):
 
 print(scores[0])
 file.close()
+
+# (75, 40)
+# 3000
+# 193434623148032
