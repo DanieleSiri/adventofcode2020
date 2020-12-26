@@ -1,14 +1,10 @@
 # https://adventofcode.com/2020/day/11
 file = open("day11_data", "r")
 data = file.read().splitlines()
-seat_map = {}
-for row, line in enumerate(data):
-    for col, value in enumerate(line):
-        seat_map[(row, col)] = value
-        # gets the maximum value for column
-        col_length = col
-    # gets the maximum value for row
-    row_length = row
+seat_map = {(row, col): value for row, line in enumerate(data)
+            for col, value in enumerate(line)}
+col_length = len(data[0])
+row_length = len(data)
 seat_map_part_2 = seat_map
 
 
@@ -56,8 +52,8 @@ while True:
     seat_map = results
 
 occupied = 0
-for a in range(row_length + 1):
-    for b in range(col_length + 1):
+for a in range(row_length):
+    for b in range(col_length):
         if seat_map[(a, b)] == '#':
             occupied += 1
 print(occupied)
@@ -157,8 +153,8 @@ while True:
     seat_map_part_2 = results
 
 occupied_2 = 0
-for a in range(row_length + 1):
-    for b in range(col_length + 1):
+for a in range(row_length):
+    for b in range(col_length):
         if seat_map_part_2[(a, b)] == '#':
             occupied_2 += 1
 print(occupied_2)
