@@ -2,21 +2,15 @@
 file = open("day9_data", "r")
 data = file.read().splitlines()
 
-values = []
 # preamble (as per problem request)
-for x in data[0:25]:
-    values.append(int(x))
+values = [int(x) for x in data[0:25]]
 
 
 # create a set of valid values, meaning they are the possible values derived from the sum of any 2 numbers
 def compute(num_list):
-    valid_values = set()
-    for i in num_list:
-        for j in num_list:
-            # numbers can't be equal
-            if i == j:
-                continue
-            valid_values.add(int(i) + int(j))
+    # numbers can't be equal
+    valid_values = {int(i) + int(j) for i in num_list
+                    for j in num_list if i != j}
     return valid_values
 
 
@@ -64,24 +58,8 @@ def wrong_value_find(num_list, wrong):
             return elements_set
 
 
-# finds the minimum and the maximum value in the set we have found
-def find_min_max(found_set):
-    e_min = list(found_set)[0]
-    e_max = list(found_set)[0]
-    for h in found_set:
-        if h > e_max:
-            e_max = h
-        elif h < e_min:
-            e_min = h
-    return e_min, e_max
-
-
 # create a full list
-full_list = []
-for x in data:
-    if int(x) == wrong_value:
-        continue
-    full_list.append(int(x))
+full_list = [int(x) for x in data if int(x) != wrong_value]
 
 while True:
     found = wrong_value_find(full_list, wrong_value)
@@ -91,6 +69,5 @@ while True:
     # forward for scanning
     full_list.pop(0)
 
-min_max_tuple = find_min_max(found)
-print(min_max_tuple[0] + min_max_tuple[1])
+print(min(found) + max(found))
 file.close()
