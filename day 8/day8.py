@@ -1,11 +1,7 @@
 # https://adventofcode.com/2020/day/8
 file = open("day8_data", "r")
 data = file.read().splitlines()
-operations = []
-for el in data:
-    tmp = el.split(" ")
-    var = (tmp[0], int(tmp[1]))
-    operations.append(var)
+operations = [(x.split(" ")[0], int(x.split(" ")[1])) for x in data]
 
 
 def execute(ops_list, completed_ops_list, index, register_value):
