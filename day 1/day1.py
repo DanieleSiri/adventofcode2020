@@ -1,9 +1,7 @@
 # https://adventofcode.com/2020/day/1
 
 num_list = open("day1_data", "r")
-numbers = set()
-for x in num_list.read().splitlines():
-    numbers.add(x)
+numbers = {x for x in num_list.read().splitlines()}
 
 # part 1
 # finds the 2 numbers that add up to 2020
