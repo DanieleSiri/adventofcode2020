@@ -2,20 +2,16 @@
 
 file = open("day6_data", "r")
 data = file.read().split("\n\n")
-formatted_data = []
 # removes newlines in the groups
-for i in data:
-    formatted_data.append(i.replace("\n", ""))
+formatted_data = [x.replace("\n", "") for x in data]
 
 # part 1
 yes = 0
 for element in formatted_data:
     # creates a set with all the letters (sets only show unique values when you evaluate them)
-    answers = set()
-    for letter in element:
-        answers.add(letter)
+    answers = {letter for letter in element}
     # counts the number of answers
-    for i, val in enumerate(answers):
+    for val in enumerate(answers):
         yes += 1
 print(yes)
 
@@ -26,10 +22,8 @@ for i in data:
     common = set()
     groups = i.split("\n")
     for l, element in enumerate(groups):
-        answers_2 = set()
         # creating the set of letters
-        for letter in element:
-            answers_2.add(letter)
+        answers_2 = {letter for letter in element}
         # creating the dictionary entries
         data_sets_list[l] = answers_2
     for x in data_sets_list:
@@ -38,7 +32,7 @@ for i in data:
         else:  # finding the values present in all group sets
             common = (common & data_sets_list[x])
     # counting how many elements are in common between all group sets
-    for m, element in enumerate(common):
+    for element in enumerate(common):
         yes_2 += 1
 print(yes_2)
 file.close()
