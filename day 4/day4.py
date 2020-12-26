@@ -46,16 +46,11 @@ def check(passport):
 
 file = open("day4_data", "r")
 data = file.read().split("\n\n")
-passport_list = []
-passport_fields_list = []
+passport_list = [element.replace("\n", " ") for element in data]
 valid_count = 0
-for element in data:
-    passport_list.append(element.replace("\n", " "))
+passport_fields_list = []
 for element in passport_list:
-    element_list = element.split(" ")
-    fields = {}
-    for x in element_list:
-        fields[x.split(":")[0]] = x.split(":")[1]
+    fields = {x.split(":")[0]: x.split(":")[1] for x in element.split(" ")}
     passport_fields_list.append(fields)
 
 for element in passport_fields_list:
