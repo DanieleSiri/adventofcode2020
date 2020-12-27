@@ -1,4 +1,7 @@
 # https://adventofcode.com/2020/day/9
+from collections import deque
+
+
 file = open("day9_data", "r")
 data = file.read().splitlines()
 
@@ -59,7 +62,7 @@ def wrong_value_find(num_list, wrong):
 
 
 # create a full list
-full_list = [int(x) for x in data if int(x) != wrong_value]
+full_list = deque((int(x) for x in data if int(x) != wrong_value))
 
 while True:
     found = wrong_value_find(full_list, wrong_value)
@@ -67,7 +70,7 @@ while True:
         break
     # removes each time the first element of the list because the values have to be contiguous so we can just move
     # forward for scanning
-    full_list.pop(0)
+    full_list.popleft()
 
 print(min(found) + max(found))
 file.close()
