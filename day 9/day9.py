@@ -6,7 +6,7 @@ file = open("day9_data", "r")
 data = file.read().splitlines()
 
 # preamble (as per problem request)
-values = [int(x) for x in data[0:25]]
+values = deque(int(x) for x in data[0:25])
 
 
 # create a set of valid values, meaning they are the possible values derived from the sum of any 2 numbers
@@ -26,7 +26,7 @@ def is_valid(valid_set, num_to_check):
 
 # update the list by popping the oldest value and appending the new value
 def update_list(num_list, num):
-    num_list.pop(0)
+    num_list.popleft()
     num_list.append(num)
     return num_list
 
