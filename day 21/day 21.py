@@ -35,9 +35,14 @@ for line in file.read().splitlines():
 
 # set of bad food for faster research
 bad_food_set = set()
+bad_food_dict = {}
 for entry in allergents:
-    for food_set in allergents[entry]:
-        bad_food_set.add(food_set)
+    for food in allergents[entry]:
+        bad_food_set.add(food)
+        try:
+            bad_food_dict[food].add(entry)
+        except KeyError:
+            bad_food_dict[food] = {entry}
 
 count = 0
 # counting the valid food
@@ -46,4 +51,35 @@ for food in all_food:
         count += 1
 print(count)
 
+# part 2
+food_found = set()
+while len(food_found) != len(set(bad_food_dict.keys())):
+    for element in bad_food_dict:
+        if len(bad_food_dict[element]) == 1:
+            food_found.add(element)
+            for x in bad_food_dict:
+                if x == element:
+                    continue
+                # removing the food that can only be assigned to 1 and only 1 allergent
+                if list(bad_food_dict[element])[0] in bad_food_dict[x]:
+                    bad_food_dict[x].remove(list(bad_food_dict[element])[0])
+
+
+# gets key of the food dict
+def get_key(my_dict, val):
+    for i in my_dict:
+        if val == my_dict[i]:
+            return i
+
+
+sorted_allergens = ''
+to_sort = []
+for j in bad_food_dict:
+    for n in bad_food_dict[j]:
+        to_sort.append(n)
+for x in sorted(to_sort):
+    sorted_allergens += get_key(bad_food_dict, {x})
+    sorted_allergens += ","
+
+print(sorted_allergens[:-1])
 file.close()
