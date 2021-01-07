@@ -55,7 +55,3 @@ for key, number in enumerate(jolts_list):
 
 print(scores[0])
 file.close()
-
-# (75, 40)
-# 3000
-# 193434623148032
